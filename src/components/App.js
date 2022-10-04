@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Route, Switch, Redirect, useRouteMatch } from 'react-router-dom';
 
 import api from '../utils/Api.js';
+import apiAuth from '../utils/ApiAuth.js';
 import CurrentUserContext from '../context/CurrentUserContext';
 
 import ProtectedRoute from './ProtectedRoute.js';
@@ -129,10 +130,15 @@ function App() {
       })
   }
 
-  function handleSignInSubmit(evt) {
-    console.log("ffofkkfj")
-    evt.preventDefault();
-    setIsInfoTooltipPopupOpen(true);
+  function handleSignInSubmit() {
+    console.log("Войти")
+    //setIsInfoTooltipPopupOpen(true);
+  }
+
+  function handleSignUpSubmit(dataObject) {
+    console.log("Зарегистрироваться");
+    console.log(dataObject);
+    //setIsInfoTooltipPopupOpen(true);
   }
   
 
@@ -143,11 +149,13 @@ function App() {
         <Switch>
           <Route path="/sign-in">
             <Login title="Вход" buttonText="Войти" 
-              onSubmit={handleSignInSubmit}
+              onLoginUser={handleSignInSubmit}
               />
           </Route>
           <Route path="/sign-up">
-            <Register title="Регистрация" buttonText="Зарегистрироваться" />
+            <Register title="Регистрация" buttonText="Зарегистрироваться" 
+              onRegisterUser={handleSignUpSubmit}
+            />
           </Route>
           <ProtectedRoute
             path="/"
