@@ -1,0 +1,16 @@
+.profile__main {
+  width: calc(100% - 160px);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .profile__main {
+    width: 100%;
+    flex-direction: column;
+
+	}
+}

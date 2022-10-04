@@ -1,0 +1,39 @@
+.card__image {
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card__image:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 950px) {
+  .card__image {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+@media (max-width: 767px) {
+  .card__image {
+    width: 282px;
+    height: 282px;
+  }
+}
+
+@media (max-width: 620px) {
+  .card__image {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card__image {
+    width: 282px;
+    height: 282px;
+  }
+}

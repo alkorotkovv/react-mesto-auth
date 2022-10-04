@@ -1,0 +1,12 @@
+.profile__name-line {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .profile__name-line {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,21 @@
+.elements {
+  width: 100%;
+  max-width: 880px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 950px) {
+  .elements {
+    padding-left: 27px;
+    padding-right: 27px;
+  }
+}
+
+@media (max-width: 767px) {
+  .elements {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+}

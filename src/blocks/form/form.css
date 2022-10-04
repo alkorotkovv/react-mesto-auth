@@ -1,0 +1,20 @@
+.form {
+  width: 100%;
+  min-width: 430px;
+  margin: 0;
+  padding: 34px 36px 37px 36px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+@media (max-width: 600px) {
+  .form {
+    min-width: 282px;
+    padding: 25px 22px;
+  }
+}
