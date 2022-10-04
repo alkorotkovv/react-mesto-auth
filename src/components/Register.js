@@ -1,5 +1,5 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm.js';
+import { Link } from 'react-router-dom';
 
 function Register(props) {
 
@@ -22,7 +22,7 @@ function Register(props) {
         </label>
       </fieldset>
       <button className="form__save-button form__save-button_type_login" onClick={props.onSubmit} type="submit" >{props.buttonText}</button>
-      <a className="form__question">Уже зарегистрированы? Войти</a>
+      <Link to="/sign-in" className="form__question">Уже зарегистрированы? Войти</Link>
     </form>
   )
 }

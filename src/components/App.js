@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import api from '../utils/Api.js';
 import CurrentUserContext from '../context/CurrentUserContext';
 
-
+import ProtectedRoute from './ProtectedRoute.js';
 import Login from './Login.js';
 import Register from './Register';
 import Header from './Header.js';
@@ -25,6 +25,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -124,6 +125,9 @@ function App() {
       })
   }
 
+
+  
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -133,17 +137,20 @@ function App() {
             <Login title="Вход" buttonText="Войти" />
           </Route>
           <Route path="/sign-up">
-            <Register title="Регистрация" buttonText="Зарегистрироваться"        />
+            <Register title="Регистрация" buttonText="Зарегистрироваться" />
           </Route>
-          <Route path="/">
-            <Main onEditProfile={handleEditProfileClick} 
-                  onAddPlace={handleAddPlaceClick} 
-                  onEditAvatar={handleEditAvatarClick} 
-                  onCardClick={handleCardClick} 
-                  cards={cards} 
-                  onCardLike={handleCardLike} 
-                  onCardDelete={handleCardDelete} />
-          </Route>
+          <ProtectedRoute
+            path="/"
+            loggedIn={loggedIn}
+            onEditProfile={handleEditProfileClick} 
+            onAddPlace={handleAddPlaceClick} 
+            onEditAvatar={handleEditAvatarClick} 
+            onCardClick={handleCardClick} 
+            cards={cards} 
+            onCardLike={handleCardLike} 
+            onCardDelete={handleCardDelete}
+            component={Main}
+          />
         </Switch>
         <Footer />
         <ImagePopup card={selectedCard} onClose = {closeAllPopups} />
@@ -151,7 +158,6 @@ function App() {
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
         <PopupWithForm name="card_delete" title="Вы уверены?" /> 
-
       </div>
     </CurrentUserContext.Provider>
   )

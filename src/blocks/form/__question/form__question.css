@@ -6,4 +6,10 @@
   font-size: 14px;
   line-height: 1.22;
   text-align: center;
+  text-decoration: none;
+  transition: opacity 0.2s linear;
+}
+.form__question:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
