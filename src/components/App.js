@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
+import { Route, Switch } from 'react-router-dom';
 
 import api from '../utils/Api.js';
 import CurrentUserContext from '../context/CurrentUserContext';
+
 
 import Login from './Login.js';
 import Register from './Register';
@@ -126,15 +128,23 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
-        <Login title="Вход" buttonText="Войти"        />
-        <Register title="Регистрация" buttonText="Зарегистрироваться"        />
-        <Main onEditProfile={handleEditProfileClick} 
-              onAddPlace={handleAddPlaceClick} 
-              onEditAvatar={handleEditAvatarClick} 
-              onCardClick={handleCardClick} 
-              cards={cards} 
-              onCardLike={handleCardLike} 
-              onCardDelete={handleCardDelete} />
+        <Switch>
+          <Route path="/sign-in">
+            <Login title="Вход" buttonText="Войти" />
+          </Route>
+          <Route path="/sign-up">
+            <Register title="Регистрация" buttonText="Зарегистрироваться"        />
+          </Route>
+          <Route path="/">
+            <Main onEditProfile={handleEditProfileClick} 
+                  onAddPlace={handleAddPlaceClick} 
+                  onEditAvatar={handleEditAvatarClick} 
+                  onCardClick={handleCardClick} 
+                  cards={cards} 
+                  onCardLike={handleCardLike} 
+                  onCardDelete={handleCardDelete} />
+          </Route>
+        </Switch>
         <Footer />
         <ImagePopup card={selectedCard} onClose = {closeAllPopups} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
