@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import api from '../utils/Api.js';
 import CurrentUserContext from '../context/CurrentUserContext';
 
+import Login from './Login.js';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -124,6 +125,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
+        <Login title="Вход" buttonText="Войти"        />
         <Main onEditProfile={handleEditProfileClick} 
               onAddPlace={handleAddPlaceClick} 
               onEditAvatar={handleEditAvatarClick} 

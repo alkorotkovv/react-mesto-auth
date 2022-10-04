@@ -56,3 +56,9 @@
 @import url(./blocks/card-scale/card-scale.css);
 @import url(./blocks/card-scale/__image/card-scale__image.css);
 @import url(./blocks/card-scale/__caption/card-scale__caption.css);
+
+@import url(./blocks/form/_type/form_type_login.css);
+@import url(./blocks/form/__title/_type/form__title_type_login.css);
+@import url(./blocks/form/__input/_content/form__input_content_email.css);
+@import url(./blocks/form/__input/_content/form__input_content_password.css);
+@import url(./blocks/form/__save-button/_type/form__save-button_type_login.css);
