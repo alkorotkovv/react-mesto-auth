@@ -119,7 +119,6 @@ function App() {
   }
 
   function handleAddPlace(placeObject) {
-    console.log(placeObject);
     api.addCard(placeObject)
       .then((newCard) => {
         setCards([newCard, ...cards]);
@@ -130,14 +129,38 @@ function App() {
       })
   }
 
-  function handleSignInSubmit() {
+  function handleSignInSubmit(dataObject) {
     console.log("Войти")
+    console.log(dataObject);
+    const {email, password} = dataObject;
+    console.log(email);
+    console.log(password);
+    apiAuth.loginUser(email, password)
+      .then((res) => {
+        console.log(res);
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     //setIsInfoTooltipPopupOpen(true);
   }
 
   function handleSignUpSubmit(dataObject) {
     console.log("Зарегистрироваться");
     console.log(dataObject);
+    const {email, password} = dataObject;
+    console.log(email);
+    console.log(password);
+    apiAuth.registerUser(email, password)
+      .then((res) => {
+        console.log(res);
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
     //setIsInfoTooltipPopupOpen(true);
   }
   

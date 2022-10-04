@@ -17,8 +17,8 @@ function Login(props) {
     evt.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
     props.onLoginUser({
-      //name: name,
-      //about: description,
+      email: email,
+      password: password,
     });
   }
 

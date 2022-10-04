@@ -27,6 +27,22 @@ class ApiAuth {
     .then(res => this._checkResult(res))
   };
 
+  //Метод логина пользователя
+  loginUser(email, password) {
+    return fetch(this._baseUrl + '/signin', {
+    method: 'POST',
+    headers: this._headers,
+    body: JSON.stringify({
+      password: `${password}`,
+      email: `${email}`
+    })
+    })
+    .then(res => this._checkResult(res))
+  };
+
+
+
+
 
 
 
@@ -115,7 +131,7 @@ class ApiAuth {
 
 
 const apiAuth = new ApiAuth({
-  baseUrl: 'https://mesto.nomoreparties.co',
+  baseUrl: 'https://auth.nomoreparties.co',
   headers: {
     'Content-Type': 'application/json'
   }
