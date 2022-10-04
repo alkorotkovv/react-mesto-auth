@@ -1,5 +1,4 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm.js';
 
 function Login(props) {
 

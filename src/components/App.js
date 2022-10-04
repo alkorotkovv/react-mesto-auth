@@ -16,6 +16,7 @@ import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import ImagePopup from './ImagePopup.js';
+import InfoTooltip from './InfoTooltip.js';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
@@ -85,6 +87,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setIsInfoTooltipPopupOpen(false);
     setSelectedCard({});
   }
 
@@ -126,7 +129,11 @@ function App() {
       })
   }
 
-
+  function handleSignInSubmit(evt) {
+    console.log("ffofkkfj")
+    evt.preventDefault();
+    setIsInfoTooltipPopupOpen(true);
+  }
   
 
   return (
@@ -135,7 +142,9 @@ function App() {
         <Header  email="email@.ru"  />
         <Switch>
           <Route path="/sign-in">
-            <Login title="Вход" buttonText="Войти" />
+            <Login title="Вход" buttonText="Войти" 
+              onSubmit={handleSignInSubmit}
+              />
           </Route>
           <Route path="/sign-up">
             <Register title="Регистрация" buttonText="Зарегистрироваться" />
@@ -158,7 +167,9 @@ function App() {
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
-        <PopupWithForm name="card_delete" title="Вы уверены?" /> 
+        <PopupWithForm name="card_delete" title="Вы уверены?" />
+        <InfoTooltip isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} image="" title="Что-то пошло не так!
+              Попробуйте ещё раз." />
       </div>
     </CurrentUserContext.Provider>
   )

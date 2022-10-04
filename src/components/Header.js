@@ -15,7 +15,7 @@ function Header(props) {
     case "/sign-up":
       block = (
         <Link to="/sign-in" className="header__sign-up">Войти</Link>
-        )
+      )
       break;
     case "/":
       block = (
@@ -23,7 +23,7 @@ function Header(props) {
           <p className="header__email">{props.email}</p>
           <Link to="/sign-in" className="header__sign-up">Выйти</Link>
         </>
-        )
+      )
       break;
   }
 
