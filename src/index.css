@@ -63,3 +63,6 @@
 @import url(./blocks/form/__input/_content/form__input_content_password.css);
 @import url(./blocks/form/__save-button/_type/form__save-button_type_login.css);
 @import url(./blocks/form/__question/form__question.css);
+@import url(./blocks/header/__sign-up/header__sign-up.css);
+@import url(./blocks/header/__email/header__email.css);
+@import url(./blocks/header/__info/header__info.css);

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useRouteMatch } from 'react-router-dom';
 
 import api from '../utils/Api.js';
 import CurrentUserContext from '../context/CurrentUserContext';
@@ -25,7 +25,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+  
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -131,7 +132,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
+        <Header  email="email@.ru"  />
         <Switch>
           <Route path="/sign-in">
             <Login title="Вход" buttonText="Войти" />
