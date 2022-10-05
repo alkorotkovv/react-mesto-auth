@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import { Route, Switch, Redirect, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 import api from '../utils/Api.js';
 import apiAuth from '../utils/ApiAuth.js';
@@ -28,8 +28,14 @@ function App() {
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(true);
-  
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState("randomemail@mail.ru");
+  const [tooltip, setTooltipText] = useState({text:"текст ошибки", isAnswerGood: false});
+  const history = useHistory();
+
+  function handleTooltipDisplay(text, isAnswerGood) {
+    setTooltipText({text: text, isAnswerGood: isAnswerGood});
+  }
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -131,14 +137,13 @@ function App() {
 
   function handleSignInSubmit(dataObject) {
     console.log("Войти")
-    console.log(dataObject);
     const {email, password} = dataObject;
-    console.log(email);
-    console.log(password);
     apiAuth.loginUser(email, password)
       .then((res) => {
         console.log(res);
-        
+        setLoggedIn(true);
+        setEmail(email);
+        history.push("/");
       })
       .catch((err) => {
         console.log(err);
@@ -147,32 +152,43 @@ function App() {
   }
 
   function handleSignUpSubmit(dataObject) {
-    console.log("Зарегистрироваться");
-    console.log(dataObject);
     const {email, password} = dataObject;
-    console.log(email);
-    console.log(password);
+    //console.log(email);
+    //console.log(password);
     apiAuth.registerUser(email, password)
       .then((res) => {
-        console.log(res);
+        if (res.data) 
+          {
+            handleTooltipDisplay("Вы успешно зарегистрировались!", true);
+            setIsInfoTooltipPopupOpen(true);
+            setTimeout(() => {
+              closeAllPopups();
+              history.push("/sign-in");
+            }, 2000);
+          }
+        else
+          {
+            handleTooltipDisplay(res, false);
+            setIsInfoTooltipPopupOpen(true);
+          }
+        
         
       })
       .catch((err) => {
         console.log(err);
       })
-
-    //setIsInfoTooltipPopupOpen(true);
   }
   
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header  email="email@.ru"  />
+        <Header  email={email}  />
         <Switch>
           <Route path="/sign-in">
             <Login title="Вход" buttonText="Войти" 
               onLoginUser={handleSignInSubmit}
+
               />
           </Route>
           <Route path="/sign-up">
@@ -199,8 +215,7 @@ function App() {
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
         <PopupWithForm name="card_delete" title="Вы уверены?" />
-        <InfoTooltip isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} image="" title="Что-то пошло не так!
-              Попробуйте ещё раз." />
+        <InfoTooltip isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} isAnswerGood={tooltip.isAnswerGood} title={tooltip.text} />
       </div>
     </CurrentUserContext.Provider>
   )

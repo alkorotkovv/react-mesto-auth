@@ -24,8 +24,26 @@ class ApiAuth {
       email: `${email}`
     })
     })
-    .then(res => this._checkResult(res))
-  };
+    .then(response => {
+      try {
+        if (response.status === 201){
+          return response.json();
+        }
+        else if (response.status === 400){
+          return ("Некорректно заполнено одно из полей");
+        }
+        else 
+          return ("Что-то пошло не так! Попробуйте ещё раз.");
+      } 
+      catch(e){
+        return (e)
+      }
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log(err));
+  }; 
 
   //Метод логина пользователя
   loginUser(email, password) {
