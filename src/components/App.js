@@ -143,7 +143,7 @@ function App() {
         console.log(res);
         setLoggedIn(true);
         setEmail(email);
-        history.push("/");
+        //history.push("/");
       })
       .catch((err) => {
         console.log(err);
@@ -170,9 +170,7 @@ function App() {
           {
             handleTooltipDisplay(res, false);
             setIsInfoTooltipPopupOpen(true);
-          }
-        
-        
+          }        
       })
       .catch((err) => {
         console.log(err);

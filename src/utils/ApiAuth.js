@@ -64,93 +64,36 @@ class ApiAuth {
       email: `${email}`
     })
     })
-    .then(res => this._checkResult(res))
-  };
-
-
-
-
-
-
-
-
-
-
-
-  //Метод получения данных пользователя
-  getUserInfo() {
-    return fetch(this._baseUrl + 'users/me', {
-    method: 'GET',
-    headers: this._headers
+    .then(response => {
+      console.log(response.json())
+      try {
+        if (response.status === 200){
+          return response.json();
+        }
+        else if (response.status === 400)
+          return ("Некорректно заполнено одно из полей");      
+        else if (response.status === 401)
+          return ("Пользователь с таким email не найден");
+        else
+        return ("Что-то пошло не так! Попробуйте ещё раз.");
+      } 
+      catch(e){
+        return (e)
+      }
     })
-    .then(res => this._checkResult(res))
-  };
-
-  //Метод получения инициализируемых карточек
-  getInitialCards() {
-    return fetch(this._baseUrl + 'cards', {
-      method: 'GET',
-      headers: this._headers
+    .then((res) => {
+      return res;
     })
-    .then(res => this._checkResult(res))
-  };
+    .catch((err) => console.log(err));
+  }; 
 
-  //Метод изменения данных пользователя
-  setUserInfo(inputValuesObject) {
-    return fetch(this._baseUrl + 'users/me', {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: `${inputValuesObject.name}`,
-        about: `${inputValuesObject.about}`
-      })
-    })
-    .then(res => this._checkResult(res))
-  };
 
-  //Метод добавления новой карточки
-  addCard(cardData) {
-    return fetch(this._baseUrl + 'cards', {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: `${cardData.place}`,
-        link: `${cardData.url}`
-      })
-    })
-    .then(res => this._checkResult(res))
-  };
 
-  //Метод удаления карточки
-  deleteCard(cardData) {
-    return fetch(this._baseUrl + 'cards/' + cardData._id, {
-      method: 'DELETE',
-      headers: this._headers,
-    })
-    .then(res => this._checkResult(res))
-  };
 
-  //Метод установки/снятия лайка
-  toggleLikeCard(cardData, isLiked) {
-    let method = isLiked ? 'DELETE':'PUT';
-    return fetch(this._baseUrl + 'cards/' + cardData._id + '/likes', {
-      method: method,
-      headers: this._headers,
-    })
-    .then(res => this._checkResult(res))
-  };
 
-  //Метод установки аватара пользователя
-  setUserAvatar(avatarData) {
-    return fetch(this._baseUrl + 'users/me/avatar', {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: `${avatarData.avatar}`
-      })
-    })
-    .then(res => this._checkResult(res))
-  };
+
+
+
 
 
 
