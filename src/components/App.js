@@ -162,7 +162,7 @@ function App() {
             handleTooltipDisplay("Вы успешно зарегистрировались!", true);
             setIsInfoTooltipPopupOpen(true);
             setTimeout(() => {
-              closeAllPopups();
+              setIsInfoTooltipPopupOpen(false);
               history.push("/sign-in");
             }, 2000);
           }

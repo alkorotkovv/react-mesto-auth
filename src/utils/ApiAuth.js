@@ -27,10 +27,19 @@ class ApiAuth {
     .then(response => {
       try {
         if (response.status === 201){
+          console.log(response.json())
           return response.json();
         }
         else if (response.status === 400){
-          return ("Некорректно заполнено одно из полей");
+          return response.json()
+          .then(response => {
+            console.log(response);
+            if (response.error)
+              return (response.error)
+            else 
+              return ("Некорректно заполнено одно из полей")
+          })
+          .catch((err) => console.log(err));
         }
         else 
           return ("Что-то пошло не так! Попробуйте ещё раз.");
