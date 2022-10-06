@@ -4,7 +4,7 @@ import imageBad from '../images/bad.png';
 function InfoTooltip(props) {
 
   const image = props.isAnswerGood ? imageGood : imageBad;
-  console.log(props)
+  //console.log(props)
   function handleShowTooltip(evt) {
     console.log("ffofkkfj")
     evt.preventDefault();

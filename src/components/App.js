@@ -135,11 +135,22 @@ function App() {
       })
   }
 
-  function handleSignInSubmit(dataObject) {
+  //Обработчик сабмита формы входа
+  function handleLoginSubmit(res) {
     console.log("Войти")
+    console.log(res)
+    if (res.token) {
+      console.log("all nice")
+    }
+    else {
+      handleTooltipDisplay(res, false);
+      setIsInfoTooltipPopupOpen(true);
+    }
+    /*
     const {email, password} = dataObject;
     apiAuth.loginUser(email, password)
       .then((res) => {
+        //console.log("ffjfjfjfjff")
         console.log(res);
         setLoggedIn(true);
         setEmail(email);
@@ -147,34 +158,24 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      })
+      })*/
     //setIsInfoTooltipPopupOpen(true);
   }
 
-  function handleSignUpSubmit(dataObject) {
-    const {email, password} = dataObject;
-    //console.log(email);
-    //console.log(password);
-    apiAuth.registerUser(email, password)
-      .then((res) => {
-        if (res.data) 
-          {
-            handleTooltipDisplay("Вы успешно зарегистрировались!", true);
-            setIsInfoTooltipPopupOpen(true);
-            setTimeout(() => {
-              setIsInfoTooltipPopupOpen(false);
-              history.push("/sign-in");
-            }, 2000);
-          }
-        else
-          {
-            handleTooltipDisplay(res, false);
-            setIsInfoTooltipPopupOpen(true);
-          }        
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+  //Обработчик сабмита формы регистрации
+  function handleRegisterSubmit(res) {
+    if (res.data) {
+      handleTooltipDisplay("Вы успешно зарегистрировались!", true);
+      setIsInfoTooltipPopupOpen(true);
+      setTimeout(() => {
+        setIsInfoTooltipPopupOpen(false);
+        history.push("/sign-in");
+      }, 2000);
+    }
+    else {
+      handleTooltipDisplay(res, false);
+      setIsInfoTooltipPopupOpen(true);
+    }        
   }
   
 
@@ -185,13 +186,13 @@ function App() {
         <Switch>
           <Route path="/sign-in">
             <Login title="Вход" buttonText="Войти" 
-              onLoginUser={handleSignInSubmit}
+              onLogin={handleLoginSubmit}
 
               />
           </Route>
           <Route path="/sign-up">
             <Register title="Регистрация" buttonText="Зарегистрироваться" 
-              onRegisterUser={handleSignUpSubmit}
+              onRegister={handleRegisterSubmit}
             />
           </Route>
           <ProtectedRoute

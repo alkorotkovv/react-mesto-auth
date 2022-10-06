@@ -1,4 +1,5 @@
 import React from 'react';
+import apiAuth from '../utils/ApiAuth.js';
 
 function Login(props) {
 
@@ -15,11 +16,11 @@ function Login(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    // Передаём значения управляемых компонентов во внешний обработчик
-    props.onLoginUser({
-      email: email,
-      password: password,
-    });
+    apiAuth.loginUser(email, password)
+      .then(res => props.onLogin(res))
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (

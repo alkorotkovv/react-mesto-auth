@@ -27,7 +27,7 @@ class ApiAuth {
     .then(response => {
       try {
         if (response.status === 201){
-          console.log(response.json())
+          //console.log(response.json())
           return response.json();
         }
         else if (response.status === 400){
@@ -54,6 +54,10 @@ class ApiAuth {
     .catch((err) => console.log(err));
   }; 
 
+
+
+
+
   //Метод логина пользователя
   loginUser(email, password) {
     return fetch(this._baseUrl + '/signin', {
@@ -64,10 +68,10 @@ class ApiAuth {
       email: `${email}`
     })
     })
-    .then(response => {
-      console.log(response.json())
+    .then(response => {    
       try {
         if (response.status === 200){
+          //console.log("успех");
           return response.json();
         }
         else if (response.status === 400)
@@ -75,14 +79,19 @@ class ApiAuth {
         else if (response.status === 401)
           return ("Пользователь с таким email не найден");
         else
-        return ("Что-то пошло не так! Попробуйте ещё раз.");
+        return ("Что-то пошло не так! Попробуйте ещё раз");
       } 
       catch(e){
         return (e)
       }
     })
-    .then((res) => {
-      return res;
+    .then((data) => {
+      //console.log(res);
+      if (data.token) 
+        localStorage.setItem('token', data.token);
+      
+      return data;
+      
     })
     .catch((err) => console.log(err));
   }; 

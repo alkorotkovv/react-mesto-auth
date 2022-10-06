@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import apiAuth from '../utils/ApiAuth.js';
 
 function Register(props) {
 
@@ -16,10 +17,11 @@ function Register(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.onRegisterUser({
-      email: email,
-      password: password,
-    });
+    apiAuth.registerUser(email, password)
+      .then(res => props.onRegister(res))
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
 
@@ -36,7 +38,7 @@ function Register(props) {
           <span className="form__input-error input-password-error" ></span>
         </label>
       </fieldset>
-      <button className="form__save-button form__save-button_type_login" onClick={props.onSubmit} type="submit" >{props.buttonText}</button>
+      <button className="form__save-button form__save-button_type_login" type="submit" >{props.buttonText}</button>
       <Link to="/sign-in" className="form__question">Уже зарегистрированы? Войти</Link>
     </form>
   )
