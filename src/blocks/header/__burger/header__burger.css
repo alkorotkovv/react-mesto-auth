@@ -4,11 +4,10 @@
 
 @media (max-width: 600px) {
   .header__burger {
-    width: 24px;
-    height: 21px;
     display: flex;
+    width: 20px;
+    height: 20px;
     object-fit: cover;
-    background-image: url(../../../images/burger.png);
     grid-area: burger;
     justify-self: right;
     align-self: center;

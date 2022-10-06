@@ -69,3 +69,4 @@
 @import url(./blocks/form/__subtitle/form__subtitle.css);
 @import url(./blocks/form/__image/form__image.css);
 @import url(./blocks/header/__burger/header__burger.css);
+@import url(./blocks/header/__info/_unvisible/header__info_unvisible.css);

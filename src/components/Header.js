@@ -1,11 +1,17 @@
+import React from 'react';
 import headerLogo from '../images/logo.svg';
+import burgerLogo from '../images/burger.png';
+import closeLogo from '../images/close.svg';
 import { Link, useLocation } from 'react-router-dom';
 
 function Header(props) {
 
 
   let block;
+  
   const location = useLocation();
+  const [visible, setVisible] = React.useState(false);
+  const image = visible? closeLogo : burgerLogo;
 
   function handleClick() {
     localStorage.removeItem('token');
@@ -13,6 +19,7 @@ function Header(props) {
 
   function handleBurgerClick() {
     console.log("bclick");
+    setVisible(!visible);
   }
   
   switch (location.pathname) {
@@ -39,12 +46,14 @@ function Header(props) {
   return (
     <header className="header">
       <img className="header__logo" src={headerLogo} alt="логотип"/>
-      <div className="header__burger" onClick={handleBurgerClick}></div>
-      <div className="header__info">
+      <img className="header__burger" src={image} onClick={handleBurgerClick}/>
+      <div className={'header__info' + (visible? "" : " header__info_unvisible")}>
         {block}
-      </div>      
+      </div>
     </header>
   )
 }
 
 export default Header;
+
+//className={`popup popup_type_card` + (Object.keys(props.card).length ? " popup_opened" : "")}

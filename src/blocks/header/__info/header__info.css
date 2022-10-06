@@ -9,8 +9,7 @@
 @media (max-width: 600px) {
   .header__info {
     width: 100%;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    padding-top: 12px;
     flex-direction: column;
     gap: 18px;
     grid-area: info;
