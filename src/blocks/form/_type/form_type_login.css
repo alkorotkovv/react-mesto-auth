@@ -6,3 +6,9 @@
   border-radius: 0;
   background-color: black;
 }
+
+@media (max-width: 600px) {
+  .form_type_login {
+    padding: 40px 30px 60px 30px;
+  }
+}

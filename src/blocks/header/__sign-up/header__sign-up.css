@@ -13,3 +13,10 @@
   opacity: 0.5;
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .header__sign-up {
+    font-size: 14px;
+    line-height: 1.2;
+	}
+}
