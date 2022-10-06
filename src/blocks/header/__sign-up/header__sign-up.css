@@ -20,3 +20,9 @@
     line-height: 1.2;
 	}
 }
+
+@media (max-width: 600px) {
+  .header__sign-up {
+    display: none;
+	}
+}

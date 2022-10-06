@@ -5,3 +5,12 @@
   align-items: center;
   gap: 24px;
 }
+
+@media (max-width: 600px) {
+  .header__info {
+    width: 24px;
+    height: 21px;
+    object-fit: cover;
+    background-image: url(../../../images/burger.png);
+	}
+}
