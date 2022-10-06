@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 import api from '../utils/Api.js';
 import apiAuth from '../utils/ApiAuth.js';
@@ -63,38 +63,36 @@ function App() {
 
 
   function checkToken() {
-    console.log("Проверяем токен");
     if (localStorage.getItem('token')) {
       apiAuth.getUserByToken(localStorage.getItem('token'))
-      .then(res => {
-        //console.log(res.data);
-        const {_id, email} = res.data;
-        setLoggedIn(true);
-        setEmail(email);
-        history.push("/");
-      })
+        .then(res => {
+          const {_id, email} = res.data;
+          setLoggedIn(true);
+          setEmail(email);
+          history.push("/");
+        })
     }
   }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(person => person._id === currentUser._id);
     api.toggleLikeCard(card, isLiked)
-    .then((newCard) => {
-      setCards(cards.map((c) => c._id === card._id ? newCard : c));
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .then((newCard) => {
+        setCards(cards.map((c) => c._id === card._id ? newCard : c));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function handleCardDelete(card) {
     api.deleteCard(card)
-    .then((res) => {
-      setCards(cards.filter((c) => c._id !== card._id));
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .then((res) => {
+        setCards(cards.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function handleEditProfileClick() {

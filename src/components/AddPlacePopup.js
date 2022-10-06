@@ -23,7 +23,7 @@ function EditAvatarPopup(props) {
   }
   
   return (
-    <PopupWithForm name="card_add" title="Новое место" buttonText="Создать" onClose = {props.onClose} isOpen={props.isOpen} onSubmit={handleSubmit} >
+    <PopupWithForm name="card_add" title="Новое место" buttonText="Создать" onClose={props.onClose} isOpen={props.isOpen} onSubmit={handleSubmit} >
       <fieldset className="form__info">
         <label className="form__field">
           <input className="form__input form__input_content_place" id="input-place" value={place} onChange={handlePlaceChange} type="text" name="place" placeholder="Название" required minLength="2" maxLength="30"/>

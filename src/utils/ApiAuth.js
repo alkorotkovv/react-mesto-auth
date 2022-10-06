@@ -19,13 +19,11 @@ class ApiAuth {
     .then(response => {
       try {
         if (response.status === 201){
-          //console.log(response.json())
           return response.json();
         }
         else if (response.status === 400){
           return response.json()
           .then(response => {
-            console.log(response);
             if (response.error)
               return (response.error)
             else 
@@ -59,7 +57,6 @@ class ApiAuth {
     .then(response => {    
       try {
         if (response.status === 200){
-          //console.log("успех");
           return response.json();
         }
         else if (response.status === 400)
