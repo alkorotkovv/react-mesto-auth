@@ -5,6 +5,10 @@ function Header(props) {
 
   let block;
   const location = useLocation();
+
+  function handleClick() {
+    localStorage.removeItem('token');
+  }
   
   switch (location.pathname) {
     case "/sign-in":
@@ -21,7 +25,7 @@ function Header(props) {
       block = (
         <>
           <p className="header__email">{props.email}</p>
-          <Link to="/sign-in" className="header__sign-up">Выйти</Link>
+          <Link to="/sign-in" className="header__sign-up" onClick={handleClick}>Выйти</Link>
         </>
       )
       break;

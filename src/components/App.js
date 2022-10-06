@@ -57,6 +57,25 @@ function App() {
       })
   }, []);
 
+  React.useEffect(() => {
+    checkToken();
+  }, []);
+
+
+  function checkToken() {
+    console.log("Проверяем токен");
+    if (localStorage.getItem('token')) {
+      apiAuth.getUserByToken(localStorage.getItem('token'))
+      .then(res => {
+        //console.log(res.data);
+        const {_id, email} = res.data;
+        setLoggedIn(true);
+        setEmail(email);
+        history.push("/");
+      })
+    }
+  }
+
   function handleCardLike(card) {
     const isLiked = card.likes.some(person => person._id === currentUser._id);
     api.toggleLikeCard(card, isLiked)
@@ -136,30 +155,17 @@ function App() {
   }
 
   //Обработчик сабмита формы входа
-  function handleLoginSubmit(res) {
-    console.log("Войти")
-    console.log(res)
+  function handleLoginSubmit(res, email) {
     if (res.token) {
-      console.log("all nice")
+      localStorage.setItem('token', res.token);
+      setEmail(email);
+      setLoggedIn(true);
+      history.push("/");
     }
     else {
       handleTooltipDisplay(res, false);
       setIsInfoTooltipPopupOpen(true);
     }
-    /*
-    const {email, password} = dataObject;
-    apiAuth.loginUser(email, password)
-      .then((res) => {
-        //console.log("ffjfjfjfjff")
-        console.log(res);
-        setLoggedIn(true);
-        setEmail(email);
-        //history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      })*/
-    //setIsInfoTooltipPopupOpen(true);
   }
 
   //Обработчик сабмита формы регистрации

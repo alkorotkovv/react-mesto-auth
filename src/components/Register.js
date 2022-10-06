@@ -24,7 +24,6 @@ function Register(props) {
       })
   }
 
-
   return (
     <form className="form form_type_login" name="form_login" onSubmit={handleSubmit} noValidate>
       <h2 className="form__title form__title_type_login">{props.title}</h2>

@@ -6,14 +6,6 @@ class ApiAuth {
     this._headers = options.headers;
   };
 
-  //Метод реакция на результат запроса
-  _checkResult(res) {
-    if (res.ok)
-        return res.json()
-      else
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-  };
-
   //Метод регистрации пользователя
   registerUser(email, password) {
     return fetch(this._baseUrl + '/signup', {
@@ -54,10 +46,6 @@ class ApiAuth {
     .catch((err) => console.log(err));
   }; 
 
-
-
-
-
   //Метод логина пользователя
   loginUser(email, password) {
     return fetch(this._baseUrl + '/signin', {
@@ -85,27 +73,22 @@ class ApiAuth {
         return (e)
       }
     })
-    .then((data) => {
-      //console.log(res);
-      if (data.token) 
-        localStorage.setItem('token', data.token);
-      
-      return data;
-      
-    })
+    .then(data => {return data})
     .catch((err) => console.log(err));
   }; 
 
-
-
-
-
-
-
-
-
-
-
+  //Метод проверки токена пользователя
+  getUserByToken(token) {
+    return fetch(this._baseUrl + '/users/me', {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" : `Bearer ${token}`
+    }
+    })
+    .then(response => response.json())
+    .catch((err) => console.log(err));
+  }; 
 }
 
 
