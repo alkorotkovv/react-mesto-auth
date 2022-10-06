@@ -1,0 +1,16 @@
+.header__burger {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .header__burger {
+    width: 24px;
+    height: 21px;
+    display: flex;
+    object-fit: cover;
+    background-image: url(../../../images/burger.png);
+    grid-area: burger;
+    justify-self: right;
+    align-self: center;
+	}
+}

@@ -8,9 +8,12 @@
 
 @media (max-width: 600px) {
   .header__info {
-    width: 24px;
-    height: 21px;
-    object-fit: cover;
-    background-image: url(../../../images/burger.png);
+    width: 100%;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    flex-direction: column;
+    gap: 18px;
+    grid-area: info;
+    justify-self: center;
 	}
 }

@@ -17,3 +17,14 @@
     padding-bottom: 31.6px;
 	}
 }
+
+@media (max-width: 600px) {
+  .header {
+    padding-top: 40px;
+    display: grid;
+    grid-template-areas:
+      "info info"
+      "logo burger";
+    row-gap: 30px;
+	}
+}

@@ -6,6 +6,6 @@
 
 @media (max-width: 600px) {
   .header__email {
-    display: none;
+    grid-area: header__email;
 	}
 }

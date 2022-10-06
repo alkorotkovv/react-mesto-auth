@@ -3,11 +3,16 @@ import { Link, useLocation } from 'react-router-dom';
 
 function Header(props) {
 
+
   let block;
   const location = useLocation();
 
   function handleClick() {
     localStorage.removeItem('token');
+  }
+
+  function handleBurgerClick() {
+    console.log("bclick");
   }
   
   switch (location.pathname) {
@@ -34,10 +39,10 @@ function Header(props) {
   return (
     <header className="header">
       <img className="header__logo" src={headerLogo} alt="логотип"/>
+      <div className="header__burger" onClick={handleBurgerClick}></div>
       <div className="header__info">
         {block}
-      </div>
-      
+      </div>      
     </header>
   )
 }
