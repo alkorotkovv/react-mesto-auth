@@ -1,0 +1,10 @@
+@media (max-width: 600px) {
+  .header__info_grid {
+    width: 100%;
+    padding-top: 12px;
+    flex-direction: column;
+    gap: 18px;
+    grid-area: info;
+    justify-self: center;
+	}
+}

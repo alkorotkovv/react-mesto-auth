@@ -8,9 +8,11 @@ function Header(props) {
 
 
   let block;
-  
+  let isGrid = false;
+  //let visible = true;
   const location = useLocation();
   const [visible, setVisible] = React.useState(false);
+  const [isHeaderGrid, setIsHeaderGrid] = React.useState(false);
   const image = visible? closeLogo : burgerLogo;
 
   function handleClick() {
@@ -25,29 +27,34 @@ function Header(props) {
   switch (location.pathname) {
     case "/sign-in":
       block = (
-        <Link to="/sign-up" className="header__sign-up">Регистрация</Link>
+        <Link to="/sign-up" className={'header__sign-up' + (isGrid? " header__sign-up_grid" : "")}>Регистрация</Link>
       )
       break;
     case "/sign-up":
+
       block = (
-        <Link to="/sign-in" className="header__sign-up">Войти</Link>
+        <Link to="/sign-in" className={'header__sign-up' + (isGrid? " header__sign-up_grid" : "")}>Войти</Link>
       )
       break;
     case "/":
+      console.log("ghghgf")
+      isGrid = true;
       block = (
         <>
           <p className="header__email">{props.email}</p>
-          <Link to="/sign-in" className="header__sign-up" onClick={handleClick}>Выйти</Link>
+          <Link to="/sign-in" className={'header__sign-up' + (isGrid? " header__sign-up_grid" : "")} onClick={handleClick}>Выйти</Link>
         </>
       )
       break;
   }
 
+  console.log(isGrid)
+
   return (
-    <header className="header">
+    <header className={'header' + (isGrid? " header_grid" : "")}>
       <img className="header__logo" src={headerLogo} alt="логотип"/>
-      <img className="header__burger" src={image} onClick={handleBurgerClick}/>
-      <div className={'header__info' + (visible? "" : " header__info_unvisible")}>
+      <img className={'header__burger' + (isGrid? " header__burger_grid" : "")} src={image} onClick={handleBurgerClick}/>
+      <div className={'header__info' + (isGrid? " header__info_grid" : "") + ((!visible && isGrid)? " header__info_unvisible" : "")}>
         {block}
       </div>
     </header>

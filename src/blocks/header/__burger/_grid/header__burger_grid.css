@@ -1,0 +1,11 @@
+@media (max-width: 600px) {
+  .header__burger_grid {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    grid-area: burger;
+    justify-self: right;
+    align-self: center;
+	}
+}

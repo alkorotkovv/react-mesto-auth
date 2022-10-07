@@ -1,0 +1,8 @@
+@media (max-width: 600px) {
+  .header_grid {
+    display: grid;
+    grid-template-areas:
+      "info info"
+      "logo burger";
+	}
+}

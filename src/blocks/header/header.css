@@ -18,11 +18,3 @@
 	}
 }
 
-@media (max-width: 600px) {
-  .header {
-    display: grid;
-    grid-template-areas:
-      "info info"
-      "logo burger";
-	}
-}
