@@ -106,7 +106,7 @@ function App() {
       })
   }
 
-  function handleCardDelete(card) {
+  function handleDeleteCard(card) {
     api.deleteCard(card)
       .then((res) => {
         setCards(cards.filter((c) => c._id !== card._id));
@@ -263,7 +263,7 @@ function App() {
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
         <PopupWithForm name="card_delete" title="Вы уверены?" />
         <InfoTooltip isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} isAnswerGood={tooltip.isAnswerGood} title={tooltip.text} />
-        <QuestionPopup card={selectedCardToDelete} isOpen={isQuestionPopupOpen} onClose={closeAllPopups} onSubmit={handleCardDelete}  />
+        <QuestionPopup card={selectedCardToDelete} isOpen={isQuestionPopupOpen} onClose={closeAllPopups} onSubmit={handleDeleteCard}  />
       </div>
     </CurrentUserContext.Provider>
   )
