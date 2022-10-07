@@ -76,10 +76,18 @@ function App() {
     if (localStorage.getItem('token')) {
       apiAuth.getUserByToken(localStorage.getItem('token'))
         .then(res => {
-          const {_id, email} = res.data;
-          setLoggedIn(true);
-          setEmail(email);
-          history.push("/");
+          if (res.data) {
+            const {_id, email} = res.data;
+            setLoggedIn(true);
+            setEmail(email);
+            history.push("/");
+          }
+          else {
+            history.push("/sign-in");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
         })
     }
   }

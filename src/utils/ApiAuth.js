@@ -83,7 +83,22 @@ class ApiAuth {
       "Authorization" : `Bearer ${token}`
     }
     })
-    .then(response => response.json())
+    .then(response => {
+      try {
+        if (response.status === 200){
+          return response.json();
+        }
+        else if (response.status === 400)
+          return ("Токен не передан или передан не в том формате");      
+        else if (response.status === 401)
+          return ("Переданный токен некорректен");
+        else
+        return ("Что-то пошло не так! Попробуйте ещё раз");
+      } 
+      catch(e){
+        return (e)
+      }
+    })      
     .catch((err) => console.log(err));
   }; 
 }
