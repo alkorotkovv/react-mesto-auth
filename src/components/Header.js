@@ -36,7 +36,7 @@ function Header(props) {
       block = (
         <>
           <p className="header__email">{props.email}</p>
-          <Link to="/sign-in" className={'header__sign-up' + (props.loggedIn? " header__sign-up_grid" : "")} onClick={handleClick}>Выйти</Link>
+          <button className={'header__sign-up' + (props.loggedIn? " header__sign-up_grid" : "")} onClick={handleClick}>Выйти</button>
         </>
       )
       break;

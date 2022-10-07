@@ -196,6 +196,7 @@ function App() {
   function handleExitSubmit() {
     localStorage.removeItem('token');
     setLoggedIn(false);
+    history.push("/sign-in");
   }
 
   
