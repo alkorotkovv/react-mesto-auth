@@ -182,22 +182,22 @@ function App() {
     }        
   }
   
+  //Обработчик выхода из аккаунта
+  function handleExitSubmit() {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header  email={email}  />
+        <Header  email={email} onExit={handleExitSubmit} loggedIn={loggedIn}/>
         <Switch>
           <Route path="/sign-in">
-            <Login title="Вход" buttonText="Войти" 
-              onLogin={handleLoginSubmit}
-
-              />
+            <Login title="Вход" buttonText="Войти" onLogin={handleLoginSubmit} />
           </Route>
           <Route path="/sign-up">
-            <Register title="Регистрация" buttonText="Зарегистрироваться" 
-              onRegister={handleRegisterSubmit}
-            />
+            <Register title="Регистрация" buttonText="Зарегистрироваться" onRegister={handleRegisterSubmit} />
           </Route>
           <ProtectedRoute
             path="/"
