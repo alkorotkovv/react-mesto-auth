@@ -20,6 +20,8 @@ function EditAvatarPopup(props) {
       place: place,
       url: url,
     });
+    setPlace("");
+    setUrl("");
   }
   
   return (
