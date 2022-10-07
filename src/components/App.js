@@ -163,33 +163,46 @@ function App() {
   }
 
   //Обработчик сабмита формы входа
-  function handleLoginSubmit(res, email) {
-    if (res.token) {
-      localStorage.setItem('token', res.token);
-      setEmail(email);
-      setLoggedIn(true);
-      history.push("/");
-    }
-    else {
-      handleTooltipDisplay(res, false);
-      setIsInfoTooltipPopupOpen(true);
-    }
+  function handleLoginSubmit(email, password) {
+    apiAuth.loginUser(email, password)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          setEmail(email);
+          setLoggedIn(true);
+          history.push("/");
+        }
+        else {
+          handleTooltipDisplay(res, false);
+          setIsInfoTooltipPopupOpen(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })  
   }
+  
 
   //Обработчик сабмита формы регистрации
-  function handleRegisterSubmit(res) {
-    if (res.data) {
-      handleTooltipDisplay("Вы успешно зарегистрировались!", true);
-      setIsInfoTooltipPopupOpen(true);
-      setTimeout(() => {
-        setIsInfoTooltipPopupOpen(false);
-        history.push("/sign-in");
-      }, 2000);
-    }
-    else {
-      handleTooltipDisplay(res, false);
-      setIsInfoTooltipPopupOpen(true);
-    }        
+  function handleRegisterSubmit(email, password) {
+    apiAuth.registerUser(email, password)
+      .then((res) => {
+        if (res.data) {
+          handleTooltipDisplay("Вы успешно зарегистрировались!", true);
+          setIsInfoTooltipPopupOpen(true);
+          setTimeout(() => {
+            setIsInfoTooltipPopupOpen(false);
+            history.push("/sign-in");
+          }, 2000);
+        }
+        else {
+          handleTooltipDisplay(res, false);
+          setIsInfoTooltipPopupOpen(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })  
   }
   
   //Обработчик выхода из аккаунта

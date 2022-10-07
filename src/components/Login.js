@@ -1,6 +1,4 @@
 import React from 'react';
-import apiAuth from '../utils/ApiAuth.js';
-
 function Login(props) {
 
   const [email, setEmail] = React.useState("");
@@ -16,11 +14,7 @@ function Login(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    apiAuth.loginUser(email, password)
-      .then(res => props.onLogin(res, email))
-      .catch((err) => {
-        console.log(err);
-      })
+    props.onLogin(email, password);
   }
 
   return (

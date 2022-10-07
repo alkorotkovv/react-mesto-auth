@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import apiAuth from '../utils/ApiAuth.js';
 
 function Register(props) {
 
@@ -17,11 +16,7 @@ function Register(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    apiAuth.registerUser(email, password)
-      .then(res => props.onRegister(res))
-      .catch((err) => {
-        console.log(err);
-      })
+    props.onRegister(email, password);
   }
 
   return (
