@@ -1,8 +1,7 @@
 .form_type_login {
   margin: 0;
-  padding: 60px 36px 60px 36px;
+  padding: 60px 36px 0 36px;
   justify-content: flex-start;
-  flex: 1;  /*для липкого футера*/
   border-radius: 0;
   background-color: black;
 }

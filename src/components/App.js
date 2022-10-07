@@ -220,10 +220,10 @@ function App() {
         <Header  email={email} onExit={handleExitSubmit} loggedIn={loggedIn}/>
         <Switch>
           <Route path="/sign-in">
-            <Login title="Вход" buttonText="Войти" onLogin={handleLoginSubmit} />
+            <Login onLogin={handleLoginSubmit} />
           </Route>
           <Route path="/sign-up">
-            <Register title="Регистрация" buttonText="Зарегистрироваться" onRegister={handleRegisterSubmit} />
+            <Register onRegister={handleRegisterSubmit} />
           </Route>
           <ProtectedRoute
             path="/"
