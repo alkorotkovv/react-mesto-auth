@@ -6,5 +6,8 @@
     gap: 18px;
     grid-area: info;
     justify-self: center;
+    margin-bottom: 30px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 	}
 }

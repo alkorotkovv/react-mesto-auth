@@ -1,4 +1,9 @@
 .header__burger {
   display: none;
+  transition: opacity 0.2s linear;
 }
 
+.header__burger:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
