@@ -1,7 +1,12 @@
 function ImagePopup(props) {
 
+  function handleClick(evt) {
+    if (evt.target.classList.contains('popup_opened'))
+    props.onClose();
+  }
+
   return (
-    <div className={`popup popup_type_card` + (Object.keys(props.card).length ? " popup_opened" : "")}> 
+    <div className={`popup popup_type_card` + (Object.keys(props.card).length ? " popup_opened" : "")} onClick={handleClick}> 
       <div className="popup__container">
         <figure className="card-scale">
             <img className="card-scale__image" src={props.card.link} alt={props.card.name}/>

@@ -38,6 +38,11 @@ function App() {
   }
 
   React.useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+    return () => { document.removeEventListener("keydown", handleKeyPress)};
+  }, []);
+
+  React.useEffect(() => {
     api.getUserInfo()
       .then((userInfo) => {
         setCurrentUser(userInfo);
@@ -61,6 +66,11 @@ function App() {
     checkToken();
   }, []);
 
+
+  function handleKeyPress(evt) {
+    if (evt.key === 'Escape')
+      closeAllPopups();
+  }
 
   function checkToken() {
     if (localStorage.getItem('token')) {
@@ -187,6 +197,8 @@ function App() {
     localStorage.removeItem('token');
     setLoggedIn(false);
   }
+
+  
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

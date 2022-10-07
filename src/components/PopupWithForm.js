@@ -1,7 +1,12 @@
 function PopupWithForm(props) {
 
+  function handleClick(evt) {
+    if (evt.target.classList.contains('popup_opened'))
+    props.onClose();
+  }
+
   return (
-    <div className={`popup popup_type_${props.name}` + (props.isOpen && " popup_opened") }>
+    <div className={`popup popup_type_${props.name}` + (props.isOpen && " popup_opened")} onClick={handleClick}>
       <div className="popup__container">
         <form className="form form_profile_edit" name={`form_${props.name}`} noValidate>
           <h2 className="form__title">{props.title}</h2>
