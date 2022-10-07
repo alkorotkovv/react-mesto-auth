@@ -18,15 +18,18 @@ import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import ImagePopup from './ImagePopup.js';
 import InfoTooltip from './InfoTooltip.js';
+import QuestionPopup from './QuestionPopup.js';
 
 function App() {
 
   const [currentUser, setCurrentUser] = useState({name: "", about: "", avatar: ""});
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isQuestionPopupOpen, setIsQuestionPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
+  const [selectedCardToDelete, setSelectedCardToDelete] = useState({});
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("randomemail@mail.ru");
@@ -107,10 +110,16 @@ function App() {
     api.deleteCard(card)
       .then((res) => {
         setCards(cards.filter((c) => c._id !== card._id));
+        setIsQuestionPopupOpen(false);
       })
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  function handleCardDeleteClick(card) {
+    setSelectedCardToDelete(card);
+    setIsQuestionPopupOpen(true);
   }
 
   function handleEditProfileClick() {
@@ -130,6 +139,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
+    setIsQuestionPopupOpen(false);
     setSelectedCard({});
   }
 
@@ -242,7 +252,7 @@ function App() {
             onCardClick={handleCardClick} 
             cards={cards} 
             onCardLike={handleCardLike} 
-            onCardDelete={handleCardDelete}
+            onCardDelete={handleCardDeleteClick}
             component={Main}
           />
         </Switch>
@@ -253,6 +263,7 @@ function App() {
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
         <PopupWithForm name="card_delete" title="Вы уверены?" />
         <InfoTooltip isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} isAnswerGood={tooltip.isAnswerGood} title={tooltip.text} />
+        <QuestionPopup card={selectedCardToDelete} isOpen={isQuestionPopupOpen} onClose={closeAllPopups} onSubmit={handleCardDelete}  />
       </div>
     </CurrentUserContext.Provider>
   )
