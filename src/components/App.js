@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import ReactDOM from 'react-dom/client';
+import React, {useState, useEffect} from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 import api from '../utils/Api.js';
@@ -40,35 +39,33 @@ function App() {
     setTooltipText({text: text, isAnswerGood: isAnswerGood});
   }
 
-  React.useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress);
+  useEffect(() => {
+    if (isEditProfilePopupOpen || isQuestionPopupOpen || isAddPlacePopupOpen || isEditAvatarPopupOpen || isInfoTooltipPopupOpen)
+      document.addEventListener("keydown", handleKeyPress);
     return () => { document.removeEventListener("keydown", handleKeyPress)};
-  }, []);
+  }, [isEditProfilePopupOpen,
+      isQuestionPopupOpen,
+      isAddPlacePopupOpen,
+      isEditAvatarPopupOpen,
+      isInfoTooltipPopupOpen
+  ])
 
-  React.useEffect(() => {
-    api.getUserInfo()
-      .then((userInfo) => {
+  useEffect(() => {
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then(([userInfo, initialCards]) => {
         setCurrentUser(userInfo);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, []);
-
-  React.useEffect(() => {
-    api.getInitialCards()
-      .then((initialCards) => {
         setCards(initialCards);
       })
       .catch((err) => {
         console.log(err);
       })
-  }, []);
+    }
+  }, [loggedIn])
 
-  React.useEffect(() => {
+  useEffect(() => {
     checkToken();
-  }, []);
-
+  }, [])
 
   function handleKeyPress(evt) {
     if (evt.key === 'Escape')
@@ -198,8 +195,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })  
-  }
-  
+  }  
 
   //Обработчик сабмита формы регистрации
   function handleRegisterSubmit(email, password) {
@@ -229,8 +225,6 @@ function App() {
     setLoggedIn(false);
     history.push("/sign-in");
   }
-
-  
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

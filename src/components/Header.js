@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import headerLogo from '../images/logo.svg';
 import burgerLogo from '../images/burger.png';
 import closeLogo from '../images/close.svg';
@@ -8,7 +8,7 @@ function Header(props) {
 
   let block;
   const location = useLocation();
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
   const image = visible? closeLogo : burgerLogo;
 
   function handleClick() {

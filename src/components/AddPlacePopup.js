@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PopupWithForm from './PopupWithForm.js';
 
 function EditAvatarPopup(props) {
 
-  const [place, setPlace] = React.useState("");
-  const [url, setUrl] = React.useState("");
+  const [place, setPlace] = useState("");
+  const [url, setUrl] = useState("");
 
   function handlePlaceChange(evt) {
     setPlace(evt.target.value);
