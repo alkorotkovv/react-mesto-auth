@@ -17,6 +17,6 @@
 - ~~Адаптивность для разных разрешений~~
 - ~~Добавить интерактивности при помощи скриптов~~
 
-## ССылка на GHPages: https://alkorotkovv.github.io/react-mesto-auth/
+## ССылка на GHPages: https://alkorotkovv.github.io/
 
 :thumbsup: Спасибо Яндекс.Практикум
