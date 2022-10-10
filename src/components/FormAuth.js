@@ -11,7 +11,7 @@ function FormAuth(props) {
           <span className="form__input-error input-email-error" ></span>
         </label>
         <label className="form__field">
-          <input className="form__input form__input_content_password" id="input-password" type="text" value={props.password} onChange={props.onPasswordChange} name="password" placeholder="Пароль" required minLength="2" maxLength="200"/>
+          <input className="form__input form__input_content_password" id="input-password" type="password" value={props.password} onChange={props.onPasswordChange} name="password" placeholder="Пароль" required minLength="2" maxLength="200"/>
           <span className="form__input-error input-password-error" ></span>
         </label>
       </fieldset>
